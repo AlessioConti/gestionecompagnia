@@ -257,5 +257,22 @@ public class CompagniaDAOImpl extends AbstractMySQLDAO implements CompagniaDAO {
 		}
 		return result;
 	}
+	
+	public boolean checkSeCiSonoLavoratori(Compagnia compagniaInput) throws Exception{
+		if (isNotActive())
+			throw new Exception("Connessione non attiva. Impossibile effettuare operazioni DAO.");
+		
+		if(compagniaInput == null)
+			throw new Exception("Errore! Dato non valido.");
+		
+		try(PreparedStatement ps = connection.prepareStatement("select * from compagnia c left outer join impiegato i ON c.id = i.compagnia_id where id=?;")){
+			ps.setLong(1, compagniaInput.getId());
+			try(ResultSet rs = ps.executeQuery()){
+				if(rs.next())
+					return true;
+			}
+		}
+		return false;
+	}
+	
 }
-

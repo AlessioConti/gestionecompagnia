@@ -31,6 +31,15 @@ public class Impiegato {
 		this.dataAssunzione = dataAssunzione;
 		this.compagnia = compagnia;
 	}
+	
+	public Impiegato(String nome, String cognome, String codiceFiscale, Date dataNascita, Date dataAssunzione) {
+		super();
+		this.nome = nome;
+		this.cognome = cognome;
+		this.codiceFiscale = codiceFiscale;
+		this.dataNascita = dataNascita;
+		this.dataAssunzione = dataAssunzione;
+	}
 
 	public Compagnia getCompagnia() {
 		return compagnia;
