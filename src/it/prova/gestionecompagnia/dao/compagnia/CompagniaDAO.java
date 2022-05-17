@@ -10,7 +10,7 @@ import it.prova.gestionecompagnia.dao.IBaseDAO;
 public interface CompagniaDAO extends IBaseDAO<Compagnia> {
 	
 	public List<Compagnia> findAllByDataAssunzioneMaggioreDi(Date dataInput) throws Exception;
-	public List<Compagnia> findAllByRagioneSocualeContiene (String lettereInput) throws Exception;
+	public List<Compagnia> findAllByRagioneSocialeContiene (String lettereInput) throws Exception;
 	public List<Compagnia> findAllByCodiceFiscaleImpiegatoContiene(String codiceInput) throws Exception;
 	
 }

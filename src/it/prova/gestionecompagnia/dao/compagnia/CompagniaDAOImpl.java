@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
 import it.prova.gestionecompagnia.dao.AbstractMySQLDAO;
 import it.prova.gestionecompagnia.model.*;
 
@@ -167,4 +168,94 @@ public class CompagniaDAOImpl extends AbstractMySQLDAO implements CompagniaDAO {
 		}
 		return result;
 	}
+
+	public List<Compagnia> findAllByDataAssunzioneMaggioreDi(Date dataInput) throws Exception{
+		if (isNotActive())
+			throw new Exception("Connessione non attiva. Impossibile effettuare operazioni DAO.");
+		
+		if(dataInput == null)
+			throw new Exception("Errore! Dato non valido.");
+		
+		List<Compagnia> compagnieTrovate = new ArrayList<Compagnia>();
+		Compagnia temp = null;
+		
+		try(PreparedStatement ps = connection.prepareStatement("select distinct * from compagnia c inner join impiegato i ON c.id = i.compagnia_id WHERE i.dataassunzione>?;")){
+			ps.setDate(1, new java.sql.Date(dataInput.getTime()));
+			
+			try(ResultSet rs = ps.executeQuery()){
+				while(rs.next()) {
+					temp = new Compagnia();
+					temp.setRagioneSociale(rs.getString("ragionesociale"));
+					temp.setFatturatoAnnuo(rs.getInt("fatturatoannuo"));
+					temp.setDataFondazione(rs.getDate("datafondazione"));
+					temp.setId(rs.getLong("id"));
+					compagnieTrovate.add(temp);
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return compagnieTrovate;
+	}
+	
+	public List<Compagnia> findAllByRagioneSocialeContiene(String input) throws Exception{
+		if (isNotActive())
+			throw new Exception("Connessione non attiva. Impossibile effettuare operazioni DAO.");
+		
+		if(input == null)
+			throw new Exception("Errore! Dato non valido.");
+		
+		List<Compagnia> compagnieTrovateRagione = new ArrayList<Compagnia>();
+		Compagnia temp = null;
+		
+		try(PreparedStatement ps = connection.prepareStatement("select * from compagnia where ragionesociale like ?;")){
+			ps.setString(1, "%"+ input + "%");
+			try(ResultSet rs = ps.executeQuery()){
+				while(rs.next()) {
+					temp = new Compagnia();
+					temp.setRagioneSociale(rs.getString("ragionesociale"));
+					temp.setFatturatoAnnuo(rs.getInt("fatturatoannuo"));
+					temp.setDataFondazione(rs.getDate("datafondazione"));
+					temp.setId(rs.getLong("id"));
+					compagnieTrovateRagione.add(temp);
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return compagnieTrovateRagione;
+	}
+	
+	public List<Compagnia> findAllByCodiceFiscaleImpiegatoContiene(String input) throws Exception{
+		if (isNotActive())
+			throw new Exception("Connessione non attiva. Impossibile effettuare operazioni DAO.");
+		
+		if(input == null)
+			throw new Exception("Errore! Dato non valido.");
+		
+		List<Compagnia> result = new ArrayList<Compagnia>();
+		Compagnia temp = null;
+		
+		try(PreparedStatement ps = connection.prepareStatement("select distinct * from compagnia c INNER JOIN impiegato i ON c.id=i.compagnia_id wherei.codicefiscale like ?;")){
+			ps.setString(1, input);
+			
+			try(ResultSet rs = ps.executeQuery()){
+				while(rs.next()) {
+					temp = new Compagnia();
+					temp.setRagioneSociale(rs.getString("ragionesociale"));
+					temp.setFatturatoAnnuo(rs.getInt("fatturatoannuo"));
+					temp.setDataFondazione(rs.getDate("datafondazione"));
+					temp.setId(rs.getLong("id"));
+					result.add(temp);
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return result;
+	}
 }
+
