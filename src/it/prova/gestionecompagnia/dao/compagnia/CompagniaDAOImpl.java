@@ -95,6 +95,17 @@ public class CompagniaDAOImpl extends AbstractMySQLDAO implements CompagniaDAO{
 		if (compagniaInput == null || compagniaInput.getId() == null || compagniaInput.getId() < 1)
 			throw new Exception("Valore di input non ammesso.");
 		
-		
+		int result = 0;
+		try(PreparedStatement ps = connection.prepareStatement("UPDATE compagnia SET ragionesociale=?, fatturatoannuo=?, datafondazione=? where id=?;" )){
+			ps.setString(1, compagniaInput.getRagioneSociale());
+			ps.setInt(2, compagniaInput.getFatturatoAnnuo());
+			ps.setDate(3, new java.sql.Date(compagniaInput.getDataFondazione().getTime()));
+			ps.setLong(4, compagniaInput.getId());
+			result = ps.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return result;
 	}
 }
