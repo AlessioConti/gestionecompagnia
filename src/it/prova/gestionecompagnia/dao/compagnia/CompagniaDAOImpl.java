@@ -88,4 +88,13 @@ public class CompagniaDAOImpl extends AbstractMySQLDAO implements CompagniaDAO{
 		return result;
 	}
 	
+	public int update(Compagnia compagniaInput) throws Exception{
+		if (isNotActive())
+			throw new Exception("Connessione non attiva. Impossibile effettuare operazioni DAO.");
+
+		if (compagniaInput == null || compagniaInput.getId() == null || compagniaInput.getId() < 1)
+			throw new Exception("Valore di input non ammesso.");
+		
+		
+	}
 }
