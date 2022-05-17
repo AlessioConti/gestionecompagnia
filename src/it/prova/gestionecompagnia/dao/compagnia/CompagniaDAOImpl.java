@@ -78,7 +78,7 @@ public class CompagniaDAOImpl extends AbstractMySQLDAO implements CompagniaDAO {
 
 		int result = 0;
 		try (PreparedStatement ps = connection.prepareStatement(
-				"insert into compagnia(ragione sociale, fatturatoannuo, datafondazione) values(?, ?, ?);")) {
+				"insert into compagnia(ragionesociale, fatturatoannuo, datafondazione) values(?, ?, ?);")) {
 			ps.setString(1, compagniaInput.getRagioneSociale());
 			ps.setInt(2, compagniaInput.getFatturatoAnnuo());
 			ps.setDate(3, new java.sql.Date(compagniaInput.getDataFondazione().getTime()));

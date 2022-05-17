@@ -7,9 +7,30 @@ public class Impiegato {
 	private Long id;
 	private String nome;
 	private String cognome;
+	private String codiceFiscale;
 	private Date dataNascita;
 	private Date dataAssunzione;
 	private Compagnia compagnia;
+
+	public String getCodiceFiscale() {
+		return codiceFiscale;
+	}
+
+	public void setCodiceFiscale(String codiceFiscale) {
+		this.codiceFiscale = codiceFiscale;
+	}
+
+	public Impiegato(Long id, String nome, String cognome, String codiceFiscale, Date dataNascita, Date dataAssunzione,
+			Compagnia compagnia) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.codiceFiscale = codiceFiscale;
+		this.dataNascita = dataNascita;
+		this.dataAssunzione = dataAssunzione;
+		this.compagnia = compagnia;
+	}
 
 	public Compagnia getCompagnia() {
 		return compagnia;
