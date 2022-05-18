@@ -107,5 +107,29 @@ public class TestCompagnia {
 		System.out.println("testFindByIdImpiegato concluso......");
 	}
 	
+	public static void testFindByExampleCompagnia(CompagniaDAO compagniaDAOInstance) throws Exception{
+		System.out.println("testFindByExampleCompagnia inizializzato.......");
+		List<Compagnia> compagnie = compagniaDAOInstance.list();
+		if(compagnie.size() < 1)
+			throw new RuntimeException("testFindByExampleCompagnia FAILED: non ci sono voci sul db");
+		Compagnia compagniaTemplate = new Compagnia("Prova prova2");
+		List<Compagnia> compagnieByExample = compagniaDAOInstance.findByExample(compagniaTemplate);
+		for(Compagnia compagniaInput : compagnieByExample)
+			System.out.println(compagniaInput);
+		System.out.println("testFindByExampleCompagnia concluso.......");
+	}
+	
+	public static void testFindByExampleImpiegato(ImpiegatoDAO impiegatoDAOInstance) throws Exception{
+		System.out.println("testFindByExampleCompagnia inizializzato.......");
+		List<Impiegato> impiegati = impiegatoDAOInstance.list();
+		if(impiegati.size() < 1)
+			throw new RuntimeException("testFindByExampleCompagnia FAILED: non ci sono voci sul db");
+		Impiegato impiegatoTemplate = new Impiegato("Alessio", "Conti");
+		List<Impiegato> impiegatoByExample = impiegatoDAOInstance.findByExample(impiegatoTemplate);
+		for(Impiegato impiegatoInput : impiegatoByExample)
+			System.out.println(impiegatoInput);
+		System.out.println("testFindByExampleCompagnia concluso.......");
+	}
+	
 
 }

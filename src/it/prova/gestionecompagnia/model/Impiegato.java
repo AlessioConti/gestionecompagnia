@@ -40,6 +40,12 @@ public class Impiegato {
 		this.dataNascita = dataNascita;
 		this.dataAssunzione = dataAssunzione;
 	}
+	
+	public Impiegato(String nome, String cognome) {
+		super();
+		this.nome = nome;
+		this.cognome = cognome;
+	}
 
 	public Compagnia getCompagnia() {
 		return compagnia;
