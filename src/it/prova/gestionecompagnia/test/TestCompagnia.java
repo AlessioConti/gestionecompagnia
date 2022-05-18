@@ -3,6 +3,7 @@ package it.prova.gestionecompagnia.test;
 import it.prova.gestionecompagnia.dao.Constants;
 
 import java.sql.Connection;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -27,8 +28,10 @@ public class TestCompagnia {
 			impiegatoDAOInstance = new ImpiegatoDAOImpl(connection);
 			/*
 			testInsertCompagnia(compagniaDAOInstance);
-			*/
+			
 			testInsertImpiegato(impiegatoDAOInstance);
+			*/
+			testFindAllRagioneSocialeContiene(compagniaDAOInstance);
 			
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -158,6 +161,14 @@ public class TestCompagnia {
 		System.out.println("testFindAllCodiceFiscaleImpiegatoContiene concluso.....");
 	}
 	
-
+	public static void testFindAllByCompagnia(ImpiegatoDAO impiegatoDAOInstance) throws Exception{
+		System.out.println("testFindAllByCompagnia inizialiizato.......");
+		Date dataCompagnia = new SimpleDateFormat("dd-MM-yyyy").parse("13-07-2007");
+		Compagnia compagniaControllo = new Compagnia("Solving Team", 3450000, dataCompagnia);
+		List<Impiegato> listaImpiegatiCompagnia = impiegatoDAOInstance.findAllByCompagnia(compagniaControllo);
+		for(Impiegato impiegatoInput : listaImpiegatiCompagnia)
+			System.out.println(impiegatoInput);
+		System.out.println("testFindAllByCompagnia concluso.......");
+	}
 
 }

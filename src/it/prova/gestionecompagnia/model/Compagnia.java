@@ -72,5 +72,9 @@ public class Compagnia {
 	public void setDataFondazione(Date dataFondazione) {
 		this.dataFondazione = dataFondazione;
 	}
+	
+	public String toString() {
+		return "Compagnia [ID = " +id+ ", Ragione Sociale = " +ragioneSociale+ ", FatturatoAnnuo = " +fatturatoAnnuo+ "]";
+	}
 
 }

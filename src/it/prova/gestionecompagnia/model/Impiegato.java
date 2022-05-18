@@ -114,5 +114,9 @@ public class Impiegato {
 	public void setDataAssunzione(Date dataAssunzione) {
 		this.dataAssunzione = dataAssunzione;
 	}
+	
+	public String toString() {
+		return "Impiegato [ID = "+id+", Nome = "+nome+", Cognome = "+cognome+", Data Nascita = "+dataNascita+", Data Assunzione = "+dataAssunzione+"]";
+	}
 
 }
