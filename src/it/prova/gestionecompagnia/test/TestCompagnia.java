@@ -187,5 +187,14 @@ public class TestCompagnia {
 			System.out.println(impiegatoInput);
 		System.out.println("testFindAllCompagniaFatturatoMaggioreDi concluso.......");
 	}
+	
+	public static void testFindAllErroreAssunzione(ImpiegatoDAO impiegatoDAOInstance) throws Exception{
+		System.out.println("testFindAllErroreAssunzione inizializzato......");
+		List<Impiegato> impiegatiErrori = impiegatoDAOInstance.findAllErroriAssunzione();
+		for(Impiegato impiegatoInput : impiegatiErrori)
+			System.out.println(impiegatoInput);
+		System.out.println("testFindAllErroreAssunzione concluso.......");
+	}
+	
 
 }
