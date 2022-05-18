@@ -4,6 +4,7 @@ import it.prova.gestionecompagnia.dao.Constants;
 
 import java.sql.Connection;
 import java.util.Date;
+import java.util.List;
 
 import it.prova.gestionecompagnia.connection.MyConnection;
 import it.prova.gestionecompagnia.dao.compagnia.CompagniaDAO;
@@ -24,9 +25,9 @@ public class TestCompagnia {
 			
 			compagniaDAOInstance = new CompagniaDAOImpl(connection);
 			impiegatoDAOInstance = new ImpiegatoDAOImpl(connection);
-			
+			/*
 			testInsertCompagnia(compagniaDAOInstance);
-			
+			*/
 			testInsertImpiegato(impiegatoDAOInstance);
 			
 		}catch (Exception e) {
@@ -36,7 +37,7 @@ public class TestCompagnia {
 	
 	public static void testInsertCompagnia(CompagniaDAO compagniaDAOInstance) throws Exception {
 		System.out.println("testInsertCompagnia inizializzato........");
-		Compagnia compagniaProva = new Compagnia("Prova prova1", 12000000, new Date("2000-10-10"));
+		Compagnia compagniaProva = new Compagnia("Prova prova1", 12000000, new Date());
 		int quantiElementiInseriti = compagniaDAOInstance.insert(compagniaProva);
 		if(quantiElementiInseriti < 1)
 			throw new RuntimeException("testInsertCompagnia FAILED");
@@ -45,7 +46,7 @@ public class TestCompagnia {
 	
 	public static void testInsertImpiegato(ImpiegatoDAO impiegatoDAOInstance) throws Exception {
 		System.out.println("testInsertImpiegato inizializzato......");
-		Impiegato impiegatoProva = new Impiegato("Alessio", "Conti", "CNTLSS02E10H501D", new Date("2002-05-10"), new Date("2022-04-28"));
+		Impiegato impiegatoProva = new Impiegato("Alessio", "Conti", "CNTLSS02E10H501D", new Date(), new Date());
 		int quantiElementiInseriti = impiegatoDAOInstance.insert(impiegatoProva);
 		if(quantiElementiInseriti < 1)
 			throw new RuntimeException("testInsertImpiegato FAILED");
@@ -54,7 +55,7 @@ public class TestCompagnia {
 	
 	public static void testDeleteCompagnia(CompagniaDAO compagniaDAOInstance) throws Exception {
 		System.out.println("testDeleteCompagnia inizializzato......");
-		Compagnia compagniaProva = new Compagnia("Prova prova2", 12000000, new Date("1999-10-10"));
+		Compagnia compagniaProva = new Compagnia("Prova prova2", 12000000, new Date());
 		if(compagniaDAOInstance.checkSeCiSonoLavoratori(compagniaProva))
 			throw new RuntimeException("ERRORE: ci sono ancora lavoratori nella compagnia, cancella loro prima");
 		int quantiElementiInseriti = compagniaDAOInstance.insert(compagniaProva);
@@ -68,7 +69,7 @@ public class TestCompagnia {
 	
 	public static void testDeleteImpiegato(ImpiegatoDAO impiegatoDAOInstance) throws Exception{
 		System.out.println("testDeleteImpiegato inizializzato.....");
-		Impiegato impiegatoProva = new Impiegato("Alessio", "Conte", "CNTLSS02E10H501A", new Date("2002-04-10"), new Date("2022-04-28"));
+		Impiegato impiegatoProva = new Impiegato("Alessio", "Conte", "CNTLSS02E10H501A", new Date(), new Date());
 		int quantiElementiInseriti = impiegatoDAOInstance.insert(impiegatoProva);
 		if(quantiElementiInseriti < 1)
 			throw new RuntimeException("testDeleteImpiegato FAILED: impiegato da rimuovere non inserito");
@@ -76,6 +77,34 @@ public class TestCompagnia {
 		if(testDelete <1)
 			throw new RuntimeException("testDeleteImpiegato FAILED: elemento non cancellato");
 		System.out.println("testDeleteImpiegato concluso.......");
+	}
+	
+	public static void testFindByIdCompagnia(CompagniaDAO compagniaDAOInstance) throws Exception{
+		System.out.println("testFindByIdCompagnia inizializzato......");
+		List<Compagnia> elementiTrovati = compagniaDAOInstance.list();
+		
+		Compagnia primaCompagnia = elementiTrovati.get(0);
+		
+		Compagnia elementoDaCercare = compagniaDAOInstance.get(primaCompagnia.getId());
+		
+		if(elementoDaCercare == null || !elementoDaCercare.getRagioneSociale().equals(primaCompagnia.getRagioneSociale()))
+			throw new RuntimeException("testFindByIdCompagnia : FAILED, le ragioni sociali non corrispondono");
+		
+		System.out.println("testFindByIdCompagnia concluso.......");
+	}
+	
+	public static void testFindByIdImpiegato(ImpiegatoDAO impiegatoDAOInstance) throws Exception{
+		System.out.println("testFindByIdImpiegato inizializzato......");
+		List<Impiegato> elementiTrovati = impiegatoDAOInstance.list();
+		
+		Impiegato primoImpiegato = elementiTrovati.get(0);
+		
+		Impiegato impiegatoDaCercare = impiegatoDAOInstance.get(primoImpiegato.getId());
+		
+		if(impiegatoDaCercare == null || !impiegatoDaCercare.getNome().equals(impiegatoDaCercare.getNome()))
+			throw new RuntimeException("testFindByIdImpiegato : FAILED, i nomi non corrispondono");
+		
+		System.out.println("testFindByIdImpiegato concluso......");
 	}
 	
 
