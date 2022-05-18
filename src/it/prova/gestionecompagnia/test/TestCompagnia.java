@@ -178,5 +178,14 @@ public class TestCompagnia {
 		System.out.println(quantiPartendoDaDataFondazione);
 		System.out.println("testCountByDataFondazioneCompagnia concluso.....");
 	}
+	
+	public static void testFindAllCompagniaFatturatoMaggioreDi(ImpiegatoDAO impiegatoDAOInstance) throws Exception{
+		System.out.println("testFindAllCompagniaFatturatoMaggioreDi inizializzato......");
+		int fatturatoPerControllo = 132000;
+		List<Impiegato> impiegatiInCompagnieAltoFatturato = impiegatoDAOInstance.findAllByCompagniaConFatturatoMaggioreDi(fatturatoPerControllo);
+		for(Impiegato impiegatoInput : impiegatiInCompagnieAltoFatturato)
+			System.out.println(impiegatoInput);
+		System.out.println("testFindAllCompagniaFatturatoMaggioreDi concluso.......");
+	}
 
 }
