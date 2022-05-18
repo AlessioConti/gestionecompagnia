@@ -149,5 +149,15 @@ public class TestCompagnia {
 		System.out.println("testFindAllRagioneSocialeContiene concluso......");
 	}
 	
+	public static void testFindAllCodiceFiscaleImpiegatoContiene(CompagniaDAO compagniaDAOInstance) throws Exception{
+		System.out.println("testFindAllCodiceFiscaleImpiegatoContiene inizializzato.....");
+		String codiceFiscaleRicerca = "H501";
+		List<Compagnia> compagniePerCodiceFiscaleImpiegato = compagniaDAOInstance.findAllByCodiceFiscaleImpiegatoContiene(codiceFiscaleRicerca);
+		for(Compagnia compagniaInput : compagniePerCodiceFiscaleImpiegato)
+			System.out.println(compagniaInput);
+		System.out.println("testFindAllCodiceFiscaleImpiegatoContiene concluso.....");
+	}
+	
+
 
 }
