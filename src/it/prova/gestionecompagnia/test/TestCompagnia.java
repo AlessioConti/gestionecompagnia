@@ -131,5 +131,14 @@ public class TestCompagnia {
 		System.out.println("testFindByExampleCompagnia concluso.......");
 	}
 	
+	public static void testFindByDataAssunzioneMaggiore(CompagniaDAO compagniaDAOInstance) throws Exception{
+		System.out.println("testFindByDataAssunzioneMaggiore inizializzato......");
+		Date dataControllo = new Date();
+		List<Compagnia> compagnieTrovate = compagniaDAOInstance.findAllByDataAssunzioneMaggioreDi(dataControllo);
+		for(Compagnia compagniaInput : compagnieTrovate)
+			System.out.println(compagniaInput);
+		System.out.println("testFindByDataAssunzioneMaggiore concluso.......");
+	}
+	
 
 }
