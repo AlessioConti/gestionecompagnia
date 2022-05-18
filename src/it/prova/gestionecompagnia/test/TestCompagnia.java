@@ -170,5 +170,13 @@ public class TestCompagnia {
 			System.out.println(impiegatoInput);
 		System.out.println("testFindAllByCompagnia concluso.......");
 	}
+	
+	public static void testCountByDataFondazioneCompagnia(ImpiegatoDAO impiegatoDAOInstance) throws Exception{
+		System.out.println("testCountByDataFondazioneCompagnia inizializzato.....");
+		Date dataFondazioneCompagnia = new SimpleDateFormat("yyyy-MM-dd").parse("2000-01-01");
+		int quantiPartendoDaDataFondazione = impiegatoDAOInstance.countByDataFondazioneCompagniaGreaterThan(dataFondazioneCompagnia);
+		System.out.println(quantiPartendoDaDataFondazione);
+		System.out.println("testCountByDataFondazioneCompagnia concluso.....");
+	}
 
 }
