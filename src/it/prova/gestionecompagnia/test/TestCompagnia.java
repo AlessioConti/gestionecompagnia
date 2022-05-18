@@ -140,5 +140,14 @@ public class TestCompagnia {
 		System.out.println("testFindByDataAssunzioneMaggiore concluso.......");
 	}
 	
+	public static void testFindAllRagioneSocialeContiene(CompagniaDAO compagniaDAOInstance) throws Exception{
+		System.out.println("testFindAllRagioneSocialeContiene inizializzato........");
+		String ragioneSocialeRicerca = "prov";
+		List<Compagnia> compagniePerRagioneSocialeRicerca = compagniaDAOInstance.findAllByRagioneSocialeContiene(ragioneSocialeRicerca);
+		for(Compagnia compagniaInput : compagniePerRagioneSocialeRicerca)
+			System.out.println(compagniaInput);
+		System.out.println("testFindAllRagioneSocialeContiene concluso......");
+	}
+	
 
 }
