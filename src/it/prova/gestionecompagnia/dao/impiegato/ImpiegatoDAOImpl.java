@@ -231,8 +231,8 @@ public class ImpiegatoDAOImpl extends AbstractMySQLDAO implements ImpiegatoDAO {
 		try(PreparedStatement ps = connection.prepareStatement("select count * from impiegato i inner join compagnia c on c.id=i.compagnia_id where c.datafondazione=?;")){
 			ps.setDate(1, new java.sql.Date(fondazioneInput.getTime()));
 			try(ResultSet rs = ps.executeQuery()){
-				while(rs.next())
-					contatoreImpiegati++;
+				if(rs.next())
+					contatoreImpiegati = rs.getInt("COUNT(*)");
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

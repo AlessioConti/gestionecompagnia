@@ -26,11 +26,11 @@ public class TestCompagnia {
 			
 			compagniaDAOInstance = new CompagniaDAOImpl(connection);
 			impiegatoDAOInstance = new ImpiegatoDAOImpl(connection);
-			/*
+			
 			testInsertCompagnia(compagniaDAOInstance);
 			
 			testInsertImpiegato(impiegatoDAOInstance);
-			*/
+
 			testFindAllRagioneSocialeContiene(compagniaDAOInstance);
 			
 		}catch (Exception e) {
